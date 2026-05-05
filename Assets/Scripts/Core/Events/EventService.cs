@@ -1,14 +1,15 @@
 using HiddenTrail.Core.Events.Controller;
+using System;
 
 namespace HiddenTrail.Core.Events.Service
 {
     public class EventService
     {
-        public EventController PlayerSwipeInput { get; private set; } // For example
+        public EventController<Enum> OnSwipe { get; private set; }
 
         public EventService()
         {
-            PlayerSwipeInput = new EventController();
+            OnSwipe = new EventController<Enum>();
         }
     }
 }

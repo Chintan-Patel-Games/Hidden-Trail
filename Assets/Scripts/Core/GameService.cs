@@ -1,21 +1,26 @@
 using HiddenTrail.Core.Events.Service;
+using HiddenTrail.Utilities;
 using UnityEngine;
 
 namespace HiddenTrail.Core.Services
 {
-    public class GameService : MonoBehaviour
+    public class GameService : GenericMonoSingleton<GameService>
     {
-        private EventService _eventService;
+        [SerializeField] private InputService _inputService;
+        public InputService InputService => _inputService;
 
-        private void Awake()
+        public EventService EventService { get; private set; }
+
+        protected override void Awake()
         {
+            base.Awake();
             InitializeServices();
         }
 
         private void InitializeServices()
         {
-            // Init order matters later
-            Debug.Log("GameService Initialized");
+            EventService = new EventService();
+            _inputService.Initialize();
         }
     }
 }
